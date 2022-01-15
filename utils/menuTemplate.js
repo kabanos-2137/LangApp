@@ -48,12 +48,13 @@ const menuTemplate = {
             submenu: [
               {
                 label: localisationConfig.menu[1].menu[0].menu[0].name,
-                click() {
+                click(item, focusedWindow) {
                   var languageConfig = config.getConfig();
                   languageConfig['language'] = "en-GB";
                   config.setConfig(languageConfig)
+                  focusedWindow.reload();
                 }
-              }
+              },
             ]
           },
           {
@@ -61,20 +62,20 @@ const menuTemplate = {
             submenu: [
               {
                 label: localisationConfig.menu[1].menu[1].menu[0].name,
-                click() {
+                click(item, focusedWindow) {
                   var themeConfig = config.getConfig();
                   themeConfig['theme'] = "Light";
                   config.setConfig(themeConfig)
-                  win.webContents.send('theme_set_light')
+                  focusedWindow.webContents.send('theme_set_light')
                 }
               },
               {
                 label: localisationConfig.menu[1].menu[1].menu[1].name,
-                click() {
+                click(item, focusedWindow) {
                   var themeConfig = config.getConfig();
                   themeConfig['theme'] = "Dark";
                   config.setConfig(themeConfig)
-                  win.webContents.send('theme_set_dark')
+                  focusedWindow.webContents.send('theme_set_dark')
                 }
               }
             ]

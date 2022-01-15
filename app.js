@@ -9,12 +9,6 @@ const fs = require('fs');
 var MainWindow; //Main Window
 
 app.on('ready', () => { //"When app's ready, create window and shit" callback
-  var localisationConfig = JSON.parse(
-    fs.readFileSync(
-      path.join(__dirname, 'utils', 'localisation', config.getConfig().language + '.json')
-    )
-  );
-
   MainWindow = new BrowserWindow({ //Initialize window and configure it
     webPreferences: { //Some important stuff, I don't really care about them
       nodeIntegration: true,
@@ -45,5 +39,14 @@ app.on('ready', () => { //"When app's ready, create window and shit" callback
         MainWindow.webContents.send('theme_set_dark')
         break;
     }
+  })
+
+  ipcMain.on('localisation_get_index', () => {
+    MainWindow.webContents.send('localisation_set_index', JSON.parse(
+      fs.readFileSync(
+        path.join(__dirname, 'utils', 'localisation', config.getConfig().language + '.json')
+        )
+      )
+    )
   })
 });
