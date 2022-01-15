@@ -3,7 +3,8 @@ const path = require('path');
 
 const config = {
   default: {
-    language: "en-GB"
+    language: "en-GB",
+    theme: "light",
   },
   getConfig: () => {
     return JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')).toString());

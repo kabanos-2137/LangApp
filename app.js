@@ -1,5 +1,5 @@
 //Import
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 const config = require('./utils/config');
@@ -30,9 +30,20 @@ app.on('ready', () => { //"When app's ready, create window and shit" callback
     })
   );
 
-  menuTemplate.setMenu();
+  menuTemplate.setMenu(MainWindow);
 
   MainWindow.on('close', () => { //Closes app when "x" in top right corner clicked or ALT+F4 typed
     app.quit();
+  })
+  
+  ipcMain.on('theme_get_onload', () => {
+    switch (config.getConfig()['theme']) {
+      case 'Light':
+        MainWindow.webContents.send('theme_set_light')
+        break;
+      case 'Dark':
+        MainWindow.webContents.send('theme_set_dark')
+        break;
+    }
   })
 });

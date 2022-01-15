@@ -13,6 +13,30 @@
           "name": "Exit"
         }
       ]
+    },
+    {
+      "name": "Settings",
+      "menu": [
+        {
+          "name": "Language",
+          "menu": [
+            {
+              "name": "British English"
+            }
+          ]
+        },
+        {
+          "name": "Theme",
+          "menu": [
+            {
+              "name": "Light"
+            },
+            {
+              "name": "Dark"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

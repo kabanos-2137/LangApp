@@ -1,11 +1,12 @@
 const fs = require("fs");
 const config = require("./config");
 const path = require("path");
-const { Menu } = require("electron");
-const { app } = require("electron/main");
+const electron = require("electron");
+const Menu = electron.Menu;
+const app = electron.app;
 
 const menuTemplate = {
-  setMenu: () => {
+  setMenu: (win) => {
     var localisationConfig = JSON.parse(
       fs.readFileSync(
         path.join(__dirname, 'localisation', config.getConfig().language + '.json')
@@ -36,6 +37,47 @@ const menuTemplate = {
             click() {
               app.quit();
             }
+          }
+        ]
+      },
+      {
+        label: localisationConfig.menu[1].name,
+        submenu: [
+          {
+            label: localisationConfig.menu[1].menu[0].name,
+            submenu: [
+              {
+                label: localisationConfig.menu[1].menu[0].menu[0].name,
+                click() {
+                  var languageConfig = config.getConfig();
+                  languageConfig['language'] = "en-GB";
+                  config.setConfig(languageConfig)
+                }
+              }
+            ]
+          },
+          {
+            label: localisationConfig.menu[1].menu[1].name,
+            submenu: [
+              {
+                label: localisationConfig.menu[1].menu[1].menu[0].name,
+                click() {
+                  var themeConfig = config.getConfig();
+                  themeConfig['theme'] = "Light";
+                  config.setConfig(themeConfig)
+                  win.webContents.send('theme_set_light')
+                }
+              },
+              {
+                label: localisationConfig.menu[1].menu[1].menu[1].name,
+                click() {
+                  var themeConfig = config.getConfig();
+                  themeConfig['theme'] = "Dark";
+                  config.setConfig(themeConfig)
+                  win.webContents.send('theme_set_dark')
+                }
+              }
+            ]
           }
         ]
       }
