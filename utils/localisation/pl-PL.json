@@ -1,41 +1,41 @@
 {
   "menu": [
     {
-      "name": "Window",
+      "name": "Okno",
       "menu": [
         {
-          "name": "Open DevTools"
+          "name": "Otwórz DevTools"
         },
         {
-          "name": "Reload Window"
+          "name": "Przeładuj Okno"
         },
         {
-          "name": "Exit"
+          "name": "Wyjdź"
         }
       ]
     },
     {
-      "name": "Settings",
+      "name": "Ustawienia",
       "menu": [
         {
-          "name": "Language",
+          "name": "Język",
           "menu": [
             {
-              "name": "British English"
+              "name": "Brytyjski Angielski"
             },
             {
-              "name": "Polish"
+              "name": "Polski"
             }
           ]
         },
         {
-          "name": "Theme",
+          "name": "Motyw",
           "menu": [
             {
-              "name": "Light"
+              "name": "Jasny"
             },
             {
-              "name": "Dark"
+              "name": "Ciemny"
             }
           ]
         }
@@ -45,7 +45,7 @@
   "index": [
     {
       "name": "test",
-      "text": "a"
+      "text": "b"
     }
   ]
 }

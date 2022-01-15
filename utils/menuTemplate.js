@@ -6,14 +6,14 @@ const Menu = electron.Menu;
 const app = electron.app;
 
 const menuTemplate = {
-  setMenu: (win) => {
+  setMenu: () => {
     var localisationConfig = JSON.parse(
       fs.readFileSync(
         path.join(__dirname, 'localisation', config.getConfig().language + '.json')
       )
     )
 
-    var menuTemplate = [
+    var menuTemplateObject = [
       {
         label: localisationConfig.menu[0].name,
         submenu: [
@@ -53,6 +53,17 @@ const menuTemplate = {
                   languageConfig['language'] = "en-GB";
                   config.setConfig(languageConfig)
                   focusedWindow.reload();
+                  menuTemplate.setMenu()
+                }
+              },
+              {
+                label: localisationConfig.menu[1].menu[0].menu[1].name,
+                click(item, focusedWindow) {
+                  var languageConfig = config.getConfig();
+                  languageConfig['language'] = "pl-PL";
+                  config.setConfig(languageConfig)
+                  focusedWindow.reload();
+                  menuTemplate.setMenu()
                 }
               },
             ]
@@ -84,7 +95,7 @@ const menuTemplate = {
       }
     ]
 
-    Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate)) // Set menu in the window
+    Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplateObject)) // Set menu in the window
   }
 }
 

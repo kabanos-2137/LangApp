@@ -24,7 +24,7 @@ app.on('ready', () => { //"When app's ready, create window and shit" callback
     })
   );
 
-  menuTemplate.setMenu(MainWindow);
+  menuTemplate.setMenu();
 
   MainWindow.on('close', () => { //Closes app when "x" in top right corner clicked or ALT+F4 typed
     app.quit();
