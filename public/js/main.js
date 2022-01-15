@@ -5,11 +5,17 @@ window.addEventListener('load', () => {
 })
 
 ipcRenderer.on('theme_set_light', () => {
-  document.body.classList.add('light')
-  document.body.classList.remove('dark')
+  let themeable = document.getElementsByClassName('thmbl')
+  for (let item of themeable){
+    item.classList.add('light')
+    item.classList.remove('dark')
+  }
 })
 
 ipcRenderer.on('theme_set_dark', () => {
-  document.body.classList.remove('light')
-  document.body.classList.add('dark')
+  let themeable = document.getElementsByClassName('thmbl')
+  for (let item of themeable){
+    item.classList.remove('light')
+    item.classList.add('dark')
+  }
 })

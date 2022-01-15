@@ -17,6 +17,7 @@ app.on('ready', () => { //"When app's ready, create window and shit" callback
     height: 900, //Height and width, they don't need any explanation (I hope so)
     width: 1600
   });
+  
 
   MainWindow.loadURL( // Loads the HTML file for display
     url.format({ 
