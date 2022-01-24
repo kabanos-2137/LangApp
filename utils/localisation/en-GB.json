@@ -44,8 +44,24 @@
   ],
   "index": [
     {
-      "name": "test",
-      "text": "a"
+      "name": "create_language_button",
+      "text": "Create new language"
+    }
+  ],
+  "dialogs": [
+    {
+      "title": "Are you sure?",
+      "options": [
+        "Yes ", "No "
+      ],
+      "message": "Are you sure you want to change the language? The application will reload!"
+    },
+    {
+      "title": "Are you sure?",
+      "options": [
+        "Yes ", "No "
+      ],
+      "message": "Are you sure you want to change the theme? The application will reload!"
     }
   ]
 }

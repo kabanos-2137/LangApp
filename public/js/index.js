@@ -1,5 +1,9 @@
 window.addEventListener('load', () => {
   ipcRenderer.send('localisation_get_index')
+
+  document.getElementById('create_language_button').addEventListener('click', () => {
+    ipcRenderer.send('new_language_open')
+  })
 })
 
 ipcRenderer.on('localisation_set_index', (event, localisationJSON) => {

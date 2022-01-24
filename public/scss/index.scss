@@ -1,1 +1,41 @@
 @import 'main';
+
+#languages{
+  background-color: inherit; 
+  float: left;
+  height: 100%;
+  width: 80%;
+}
+
+#settings_bar{
+  float: left;
+  height: 100%;
+  width: calc(20% - 2px);
+  border-left: 2px solid black;
+  margin-left: 80%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  &.light{
+    background-color: #777777;
+  }
+  &.dark{
+    background-color: #333333;
+  }
+
+  #create_language_button{
+    width: 70%;
+    height: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin-bottom: 10px;
+  }
+}

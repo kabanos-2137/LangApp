@@ -44,8 +44,24 @@
   ],
   "index": [
     {
-      "name": "test",
-      "text": "b"
+      "name": "create_language_button",
+      "text": "Utwórz nowy język"
+    }
+  ],
+  "dialogs": [
+    {
+      "title": "Czy na pewno?",
+      "options": [
+        "Tak ", "Nie "
+      ],
+      "message": "Czy na pewno chcesz zmienić język? Spowoduje to przeładowanie aplikacji!"
+    },
+    {
+      "title": "Czy na pewno?",
+      "options": [
+        "Tak ", "Nie "
+      ],
+      "message": "Czy na pewno chcesz zmienić motyw? Spowoduje to przeładowanie aplikacji!"
     }
   ]
 }

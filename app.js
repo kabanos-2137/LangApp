@@ -3,13 +3,15 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 const config = require('./utils/config');
+const CreateLangWindow = require('./utils/clw')
 const menuTemplate = require('./utils/menuTemplate')
 const fs = require('fs');
 
-var MainWindow; //Main Window
+var mainWindow; //Main Window
+var createLangWindow; //Create Language Window
 
 app.on('ready', () => { //"When app's ready, create window and shit" callback
-  MainWindow = new BrowserWindow({ //Initialize window and configure it
+  mainWindow = new BrowserWindow({ //Initialize window and configure it
     webPreferences: { //Some important stuff, I don't really care about them
       nodeIntegration: true,
       contextIsolation: false
@@ -19,7 +21,7 @@ app.on('ready', () => { //"When app's ready, create window and shit" callback
   });
   
 
-  MainWindow.loadURL( // Loads the HTML file for display
+  mainWindow.loadURL( // Loads the HTML file for display
     url.format({ 
       pathname: path.join(__dirname, 'public', 'html', 'index.html')
     })
@@ -27,27 +29,39 @@ app.on('ready', () => { //"When app's ready, create window and shit" callback
 
   menuTemplate.setMenu();
 
-  MainWindow.on('close', () => { //Closes app when "x" in top right corner clicked or ALT+F4 typed
+  mainWindow.on('close', () => { //Closes app when "x" in top right corner clicked or ALT+F4 typed
     app.quit();
   })
   
   ipcMain.on('theme_get_onload', () => {
     switch (config.getConfig()['theme']) {
       case 'Light':
-        MainWindow.webContents.send('theme_set_light')
+        mainWindow.webContents.send('theme_set_light')
         break;
       case 'Dark':
-        MainWindow.webContents.send('theme_set_dark')
+        mainWindow.webContents.send('theme_set_dark')
         break;
     }
   })
 
   ipcMain.on('localisation_get_index', () => {
-    MainWindow.webContents.send('localisation_set_index', JSON.parse(
+    mainWindow.webContents.send('localisation_set_index', JSON.parse(
       fs.readFileSync(
         path.join(__dirname, 'utils', 'localisation', config.getConfig().language + '.json')
         )
       )
     )
+  })
+
+  ipcMain.on('new_language_open', () => {
+    if(createLangWindow){
+      return;
+    }
+
+    createLangWindow = new CreateLangWindow();
+  })
+
+  ipcMain.on('reload_window_all', () => {
+    mainWindow.reload();
   })
 });

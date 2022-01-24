@@ -4,6 +4,7 @@ const path = require("path");
 const electron = require("electron");
 const Menu = electron.Menu;
 const app = electron.app;
+const dialog = electron.dialog;
 
 const menuTemplate = {
   setMenu: () => {
@@ -48,22 +49,44 @@ const menuTemplate = {
             submenu: [
               {
                 label: localisationConfig.menu[1].menu[0].menu[0].name,
-                click(item, focusedWindow) {
-                  var languageConfig = config.getConfig();
-                  languageConfig['language'] = "en-GB";
-                  config.setConfig(languageConfig)
-                  focusedWindow.reload();
-                  menuTemplate.setMenu()
+                click(item) {
+                  let options = {
+                    title: localisationConfig.dialogs[0].title,
+                    buttons: [localisationConfig.dialogs[0].options[0], localisationConfig.dialogs[0].options[1]],
+                    message: localisationConfig.dialogs[0].message
+                  }
+                  dialog.showMessageBox(null, options).then(({response}) => {
+                    if(response == 1){
+                      return
+                    }
+                    var languageConfig = config.getConfig();
+                    languageConfig['language'] = "en-GB";
+                    config.setConfig(languageConfig)
+                    app.relaunch()
+                    app.exit()
+                    menuTemplate.setMenu()
+                  })
                 }
               },
               {
                 label: localisationConfig.menu[1].menu[0].menu[1].name,
-                click(item, focusedWindow) {
-                  var languageConfig = config.getConfig();
-                  languageConfig['language'] = "pl-PL";
-                  config.setConfig(languageConfig)
-                  focusedWindow.reload();
-                  menuTemplate.setMenu()
+                click(item) {
+                  let options = {
+                    title: localisationConfig.dialogs[0].title,
+                    buttons: [localisationConfig.dialogs[0].options[0], localisationConfig.dialogs[0].options[1]],
+                    message: localisationConfig.dialogs[0].message
+                  }
+                  dialog.showMessageBox(null, options).then(({response}) => {
+                    if(response == 1){
+                      return
+                    }
+                    var languageConfig = config.getConfig();
+                    languageConfig['language'] = "pl-PL";
+                    config.setConfig(languageConfig)
+                    app.relaunch()
+                    app.exit()
+                    menuTemplate.setMenu()
+                  })
                 }
               },
             ]
@@ -73,20 +96,42 @@ const menuTemplate = {
             submenu: [
               {
                 label: localisationConfig.menu[1].menu[1].menu[0].name,
-                click(item, focusedWindow) {
-                  var themeConfig = config.getConfig();
-                  themeConfig['theme'] = "Light";
-                  config.setConfig(themeConfig)
-                  focusedWindow.webContents.send('theme_set_light')
+                click(item) {
+                  let options = {
+                    title: localisationConfig.dialogs[1].title,
+                    buttons: [localisationConfig.dialogs[1].options[0], localisationConfig.dialogs[1].options[1]],
+                    message: localisationConfig.dialogs[1].message
+                  }
+                  dialog.showMessageBox(null, options).then(({response}) => {
+                    if(response == 1){
+                      return
+                    }
+                    var themeConfig = config.getConfig();
+                    themeConfig['theme'] = "Light";
+                    config.setConfig(themeConfig)
+                    app.relaunch()
+                    app.exit()
+                  })
                 }
               },
               {
                 label: localisationConfig.menu[1].menu[1].menu[1].name,
                 click(item, focusedWindow) {
-                  var themeConfig = config.getConfig();
-                  themeConfig['theme'] = "Dark";
-                  config.setConfig(themeConfig)
-                  focusedWindow.webContents.send('theme_set_dark')
+                  let options = {
+                    title: localisationConfig.dialogs[1].title,
+                    buttons: [localisationConfig.dialogs[1].options[0], localisationConfig.dialogs[1].options[1]],
+                    message: localisationConfig.dialogs[1].message
+                  }
+                  dialog.showMessageBox(null, options).then(({response}) => {
+                    if(response == 1){
+                      return
+                    }
+                    var themeConfig = config.getConfig();
+                    themeConfig['theme'] = "Dark";
+                    config.setConfig(themeConfig)
+                    app.relaunch()
+                    app.exit()
+                  })
                 }
               }
             ]
